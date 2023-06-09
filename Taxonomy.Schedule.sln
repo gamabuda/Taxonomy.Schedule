@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taxonomy.Schedule.Wpf", "Taxonomy.Schedule.Wpf\Taxonomy.Schedule.Wpf.csproj", "{B10FBF1B-841D-4822-A625-AEA30939D09D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taxonomy.Schedule.Test", "Taxonomy.Schedule.Test\Taxonomy.Schedule.Test.csproj", "{7163223A-86AD-44AD-8175-AE903D19C2F4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B10FBF1B-841D-4822-A625-AEA30939D09D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B10FBF1B-841D-4822-A625-AEA30939D09D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B10FBF1B-841D-4822-A625-AEA30939D09D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B10FBF1B-841D-4822-A625-AEA30939D09D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7163223A-86AD-44AD-8175-AE903D19C2F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7163223A-86AD-44AD-8175-AE903D19C2F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7163223A-86AD-44AD-8175-AE903D19C2F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7163223A-86AD-44AD-8175-AE903D19C2F4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {48DA0C16-C392-4363-B9DF-D1612C05BB93}
+	EndGlobalSection
+EndGlobal

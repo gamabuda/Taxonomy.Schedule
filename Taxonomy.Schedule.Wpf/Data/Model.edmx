@@ -1,0 +1,549 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище taxonamy1Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Brigade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="BrigadeShedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Brigade" Type="int" />
+          <Property Name="Id_Shedule" Type="int" />
+          <Property Name="Id_TypeChange" Type="int" />
+        </EntityType>
+        <EntityType Name="Chat">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsAllowed" Type="bit" />
+          <Property Name="Request_Id" Type="int" Nullable="false" />
+          <Property Name="Sender_Id" Type="int" Nullable="false" />
+          <Property Name="Owner_Id" Type="int" Nullable="false" />
+          <Property Name="IsReaded" Type="bit" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Id_Post" Type="int" />
+          <Property Name="Id_Brigade" Type="int" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Shedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DayOfWeek" Type="date" />
+        </EntityType>
+        <EntityType Name="TypeChange">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_BrigadeShedule_Brigade">
+          <End Role="Brigade" Type="Self.Brigade" Multiplicity="0..1" />
+          <End Role="BrigadeShedule" Type="Self.BrigadeShedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brigade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BrigadeShedule">
+              <PropertyRef Name="Id_Brigade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BrigadeShedule_Shedule">
+          <End Role="Shedule" Type="Self.Shedule" Multiplicity="0..1" />
+          <End Role="BrigadeShedule" Type="Self.BrigadeShedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shedule">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BrigadeShedule">
+              <PropertyRef Name="Id_Shedule" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BrigadeShedule_TypeChange">
+          <End Role="TypeChange" Type="Self.TypeChange" Multiplicity="0..1" />
+          <End Role="BrigadeShedule" Type="Self.BrigadeShedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeChange">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BrigadeShedule">
+              <PropertyRef Name="Id_TypeChange" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chat_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Chat" Type="Self.Chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chat">
+              <PropertyRef Name="Sender_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chat_Employee1">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Chat" Type="Self.Chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chat">
+              <PropertyRef Name="Owner_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chat_Request">
+          <End Role="Request" Type="Self.Request" Multiplicity="1" />
+          <End Role="Chat" Type="Self.Chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Request">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chat">
+              <PropertyRef Name="Request_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Brigade">
+          <End Role="Brigade" Type="Self.Brigade" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brigade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Id_Brigade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Post">
+          <End Role="Post" Type="Self.Post" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Id_Post" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище taxonamy1ModelContainer">
+          <EntitySet Name="Brigade" EntityType="Self.Brigade" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BrigadeShedule" EntityType="Self.BrigadeShedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Chat" EntityType="Self.Chat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Request" EntityType="Self.Request" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shedule" EntityType="Self.Shedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeChange" EntityType="Self.TypeChange" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BrigadeShedule_Brigade" Association="Self.FK_BrigadeShedule_Brigade">
+            <End Role="Brigade" EntitySet="Brigade" />
+            <End Role="BrigadeShedule" EntitySet="BrigadeShedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BrigadeShedule_Shedule" Association="Self.FK_BrigadeShedule_Shedule">
+            <End Role="Shedule" EntitySet="Shedule" />
+            <End Role="BrigadeShedule" EntitySet="BrigadeShedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BrigadeShedule_TypeChange" Association="Self.FK_BrigadeShedule_TypeChange">
+            <End Role="TypeChange" EntitySet="TypeChange" />
+            <End Role="BrigadeShedule" EntitySet="BrigadeShedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chat_Employee" Association="Self.FK_Chat_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Chat" EntitySet="Chat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chat_Employee1" Association="Self.FK_Chat_Employee1">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Chat" EntitySet="Chat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chat_Request" Association="Self.FK_Chat_Request">
+            <End Role="Request" EntitySet="Request" />
+            <End Role="Chat" EntitySet="Chat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Brigade" Association="Self.FK_Employee_Brigade">
+            <End Role="Brigade" EntitySet="Brigade" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Post" Association="Self.FK_Employee_Post">
+            <End Role="Post" EntitySet="Post" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="taxonamy1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Brigade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BrigadeShedule" Relationship="Self.FK_BrigadeShedule_Brigade" FromRole="Brigade" ToRole="BrigadeShedule" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_Brigade" FromRole="Brigade" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="BrigadeShedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Brigade" Type="Int32" />
+          <Property Name="Id_Shedule" Type="Int32" />
+          <Property Name="Id_TypeChange" Type="Int32" />
+          <NavigationProperty Name="Brigade" Relationship="Self.FK_BrigadeShedule_Brigade" FromRole="BrigadeShedule" ToRole="Brigade" />
+          <NavigationProperty Name="Shedule" Relationship="Self.FK_BrigadeShedule_Shedule" FromRole="BrigadeShedule" ToRole="Shedule" />
+          <NavigationProperty Name="TypeChange" Relationship="Self.FK_BrigadeShedule_TypeChange" FromRole="BrigadeShedule" ToRole="TypeChange" />
+        </EntityType>
+        <EntityType Name="Chat">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsAllowed" Type="Boolean" />
+          <Property Name="Request_Id" Type="Int32" Nullable="false" />
+          <Property Name="Sender_Id" Type="Int32" Nullable="false" />
+          <Property Name="Owner_Id" Type="Int32" Nullable="false" />
+          <Property Name="IsReaded" Type="Boolean" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Chat_Employee" FromRole="Chat" ToRole="Employee" />
+          <NavigationProperty Name="Employee1" Relationship="Self.FK_Chat_Employee1" FromRole="Chat" ToRole="Employee" />
+          <NavigationProperty Name="Request" Relationship="Self.FK_Chat_Request" FromRole="Chat" ToRole="Request" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Id_Post" Type="Int32" />
+          <Property Name="Id_Brigade" Type="Int32" />
+          <NavigationProperty Name="Brigade" Relationship="Self.FK_Employee_Brigade" FromRole="Employee" ToRole="Brigade" />
+          <NavigationProperty Name="Chat" Relationship="Self.FK_Chat_Employee" FromRole="Employee" ToRole="Chat" />
+          <NavigationProperty Name="Chat1" Relationship="Self.FK_Chat_Employee1" FromRole="Employee" ToRole="Chat" />
+          <NavigationProperty Name="Post" Relationship="Self.FK_Employee_Post" FromRole="Employee" ToRole="Post" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_Post" FromRole="Post" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Chat" Relationship="Self.FK_Chat_Request" FromRole="Request" ToRole="Chat" />
+        </EntityType>
+        <EntityType Name="Shedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DayOfWeek" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="BrigadeShedule" Relationship="Self.FK_BrigadeShedule_Shedule" FromRole="Shedule" ToRole="BrigadeShedule" />
+        </EntityType>
+        <EntityType Name="TypeChange">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BrigadeShedule" Relationship="Self.FK_BrigadeShedule_TypeChange" FromRole="TypeChange" ToRole="BrigadeShedule" />
+        </EntityType>
+        <Association Name="FK_BrigadeShedule_Brigade">
+          <End Role="Brigade" Type="Self.Brigade" Multiplicity="0..1" />
+          <End Role="BrigadeShedule" Type="Self.BrigadeShedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brigade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BrigadeShedule">
+              <PropertyRef Name="Id_Brigade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Brigade">
+          <End Role="Brigade" Type="Self.Brigade" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brigade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Id_Brigade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BrigadeShedule_Shedule">
+          <End Role="Shedule" Type="Self.Shedule" Multiplicity="0..1" />
+          <End Role="BrigadeShedule" Type="Self.BrigadeShedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shedule">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BrigadeShedule">
+              <PropertyRef Name="Id_Shedule" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BrigadeShedule_TypeChange">
+          <End Role="TypeChange" Type="Self.TypeChange" Multiplicity="0..1" />
+          <End Role="BrigadeShedule" Type="Self.BrigadeShedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeChange">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BrigadeShedule">
+              <PropertyRef Name="Id_TypeChange" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chat_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Chat" Type="Self.Chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chat">
+              <PropertyRef Name="Sender_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chat_Employee1">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Chat" Type="Self.Chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chat">
+              <PropertyRef Name="Owner_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chat_Request">
+          <End Role="Request" Type="Self.Request" Multiplicity="1" />
+          <End Role="Chat" Type="Self.Chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Request">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chat">
+              <PropertyRef Name="Request_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Post">
+          <End Role="Post" Type="Self.Post" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Id_Post" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="taxonamyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Brigade" EntityType="Self.Brigade" />
+          <EntitySet Name="BrigadeShedule" EntityType="Self.BrigadeShedule" />
+          <EntitySet Name="Chat" EntityType="Self.Chat" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" />
+          <EntitySet Name="Post" EntityType="Self.Post" />
+          <EntitySet Name="Request" EntityType="Self.Request" />
+          <EntitySet Name="Shedule" EntityType="Self.Shedule" />
+          <EntitySet Name="TypeChange" EntityType="Self.TypeChange" />
+          <AssociationSet Name="FK_BrigadeShedule_Brigade" Association="Self.FK_BrigadeShedule_Brigade">
+            <End Role="Brigade" EntitySet="Brigade" />
+            <End Role="BrigadeShedule" EntitySet="BrigadeShedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Brigade" Association="Self.FK_Employee_Brigade">
+            <End Role="Brigade" EntitySet="Brigade" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BrigadeShedule_Shedule" Association="Self.FK_BrigadeShedule_Shedule">
+            <End Role="Shedule" EntitySet="Shedule" />
+            <End Role="BrigadeShedule" EntitySet="BrigadeShedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BrigadeShedule_TypeChange" Association="Self.FK_BrigadeShedule_TypeChange">
+            <End Role="TypeChange" EntitySet="TypeChange" />
+            <End Role="BrigadeShedule" EntitySet="BrigadeShedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chat_Employee" Association="Self.FK_Chat_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Chat" EntitySet="Chat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chat_Employee1" Association="Self.FK_Chat_Employee1">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Chat" EntitySet="Chat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chat_Request" Association="Self.FK_Chat_Request">
+            <End Role="Request" EntitySet="Request" />
+            <End Role="Chat" EntitySet="Chat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Post" Association="Self.FK_Employee_Post">
+            <End Role="Post" EntitySet="Post" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище taxonamy1ModelContainer" CdmEntityContainer="taxonamyEntities">
+          <EntitySetMapping Name="Brigade">
+            <EntityTypeMapping TypeName="taxonamy1Model.Brigade">
+              <MappingFragment StoreEntitySet="Brigade">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BrigadeShedule">
+            <EntityTypeMapping TypeName="taxonamy1Model.BrigadeShedule">
+              <MappingFragment StoreEntitySet="BrigadeShedule">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_Brigade" ColumnName="Id_Brigade" />
+                <ScalarProperty Name="Id_Shedule" ColumnName="Id_Shedule" />
+                <ScalarProperty Name="Id_TypeChange" ColumnName="Id_TypeChange" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Chat">
+            <EntityTypeMapping TypeName="taxonamy1Model.Chat">
+              <MappingFragment StoreEntitySet="Chat">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="IsAllowed" ColumnName="IsAllowed" />
+                <ScalarProperty Name="Request_Id" ColumnName="Request_Id" />
+                <ScalarProperty Name="Sender_Id" ColumnName="Sender_Id" />
+                <ScalarProperty Name="Owner_Id" ColumnName="Owner_Id" />
+                <ScalarProperty Name="IsReaded" ColumnName="IsReaded" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="taxonamy1Model.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Id_Post" ColumnName="Id_Post" />
+                <ScalarProperty Name="Id_Brigade" ColumnName="Id_Brigade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Post">
+            <EntityTypeMapping TypeName="taxonamy1Model.Post">
+              <MappingFragment StoreEntitySet="Post">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Request">
+            <EntityTypeMapping TypeName="taxonamy1Model.Request">
+              <MappingFragment StoreEntitySet="Request">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shedule">
+            <EntityTypeMapping TypeName="taxonamy1Model.Shedule">
+              <MappingFragment StoreEntitySet="Shedule">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DayOfWeek" ColumnName="DayOfWeek" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeChange">
+            <EntityTypeMapping TypeName="taxonamy1Model.TypeChange">
+              <MappingFragment StoreEntitySet="TypeChange">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
