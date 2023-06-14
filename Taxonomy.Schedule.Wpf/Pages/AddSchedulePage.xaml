@@ -34,7 +34,7 @@
                 <ComboBox
                     x:Name="brigadeCB"
                     Margin="20"
-                    materialDesign:HintAssist.Hint="Штат" />
+                    materialDesign:HintAssist.Hint="Бригада" />
                 <ComboBox
                     x:Name="TypeCB"
                     Margin="20"

@@ -11,6 +11,7 @@
     Height="450"
     Background="{DynamicResource MaterialDesignPaper}"
     FontFamily="{DynamicResource MaterialDesignFont}"
+    Icon="/Resources/logo(1).ico"
     MouseDown="Window_MouseDown"
     ResizeMode="NoResize"
     TextElement.FontSize="14"
@@ -40,7 +41,7 @@
                     Height="24"
                     VerticalAlignment="Center"
                     Source="/Resources/logo.png" />
-                <Label VerticalAlignment="Center" Content="ОЭС ПЛАНЕТА" />
+                <Label VerticalAlignment="Center" Content="ООО ПЛАНЕТА" />
             </WrapPanel>
             <Button
                 x:Name="CloseBtn"

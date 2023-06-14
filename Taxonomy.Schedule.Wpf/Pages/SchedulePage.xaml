@@ -113,7 +113,7 @@
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn DisplayMemberBinding="{Binding Shedule.DayOfWeek, StringFormat='{}{0:dd.MM.yyyy}'}" Header="День" />
-                                    <GridViewColumn DisplayMemberBinding="{Binding Brigade.Name}" Header="Штат" />
+                                    <GridViewColumn DisplayMemberBinding="{Binding Brigade.Name}" Header="Бригада" />
                                     <GridViewColumn DisplayMemberBinding="{Binding TypeChange.Name}" Header="Смена" />
                                 </GridView>
                             </ListView.View>

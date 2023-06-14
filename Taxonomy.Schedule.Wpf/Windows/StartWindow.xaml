@@ -20,7 +20,7 @@
     TextOptions.TextRenderingMode="Auto"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
-    mc:Ignorable="d">
+    mc:Ignorable="d" Icon="/Resources/logo(1).ico">
 
 
     <Grid>
@@ -140,7 +140,17 @@
                 <Label x:Name="UserLb" VerticalAlignment="Center" />
             </WrapPanel>
 
-            <Image Source="/Resources/logo.png" />
+            <WrapPanel
+                Margin="5,0,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Cursor="">
+                <Image
+                    Height="24"
+                    VerticalAlignment="Center"
+                    Source="/Resources/logo.png" />
+                <Label VerticalAlignment="Center" Content="ООО ПЛАНЕТА" />
+            </WrapPanel>
 
             <WrapPanel
                 Margin="0,0,15,0"

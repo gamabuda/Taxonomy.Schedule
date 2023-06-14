@@ -52,7 +52,7 @@
                 <ComboBox
                     x:Name="brigadeCB"
                     Margin="20,10,20,10"
-                    materialDesign:HintAssist.Hint="Штат"
+                    materialDesign:HintAssist.Hint="Бригада"
                     DisplayMemberPath="Name"
                     SelectedItem="{Binding Brigade}" />
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
